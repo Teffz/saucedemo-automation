@@ -1,0 +1,29 @@
+# Robot Framework outputs
+output.xml
+log.html
+report.html
+reports/
+*.png
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Screenshots de falha (geradas automaticamente)
+screenshots/

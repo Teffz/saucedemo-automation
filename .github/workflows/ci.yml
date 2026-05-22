@@ -1,0 +1,85 @@
+name: 🤖 Robot Framework — CI Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  api-tests:
+    name: 🔌 API Tests (ReqRes)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run API tests
+        run: |
+          robot \
+            --listener allure_robotframework:reports/allure-results \
+            --outputdir reports/robot \
+            --loglevel INFO \
+            tests/api/
+
+      - name: Upload Allure results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results-api
+          path: reports/allure-results/
+
+      - name: Upload Robot report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: robot-report-api
+          path: reports/robot/
+
+  web-tests:
+    name: 🌐 WEB Tests (SauceDemo)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          rfbrowser init
+
+      - name: Run WEB smoke tests
+        run: |
+          robot \
+            --listener allure_robotframework:reports/allure-results \
+            --outputdir reports/robot \
+            --include smoke \
+            tests/web/
+
+      - name: Upload Allure results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results-web
+          path: reports/allure-results/
+
+      - name: Upload Robot report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: robot-report-web
+          path: reports/robot/
