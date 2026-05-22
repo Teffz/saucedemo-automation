@@ -333,7 +333,7 @@ allure open reports/allure-report
 
 ## 👨‍💻 Autor
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Conectar-blue?logo=linkedin)]([https://linkedin.com/in/SEU-PERFIL-AQUI](https://www.linkedin.com/in/sthefane-nns/))
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Conectar-blue?logo=linkedin)](](https://www.linkedin.com/in/sthefane-nns/))
 [![GitHub](https://img.shields.io/badge/GitHub-Perfil-black?logo=github)](https://github.com/Teffz)
 
 ---
